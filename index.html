@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JP Shopping Mart</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .nav {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        header .nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            margin: 1rem auto;
+            width: 90%;
+            height: 300px;
+            border-radius: 10px;
+        }
+
+        .carousel img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .tile {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div>JP Shopping Mart</div>
+        <ul class="nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Carousel Section -->
+    <div class="carousel">
+        <img src="https://via.placeholder.com/1500x300?text=Product+1" alt="Product 1">
+        <img src="https://via.placeholder.com/1500x300?text=Product+2" alt="Product 2">
+        <img src="https://via.placeholder.com/1500x300?text=Product+3" alt="Product 3">
+    </div>
+
+    <!-- Categories Section -->
+    <div class="tiles" id="categories">
+        <!-- Tiles will be dynamically inserted here -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        &copy; 2024 JP Shopping Mart. All Rights Reserved.
+    </footer>
+
+    <script>
+        
+        // List of categories
+        //const categories = ["Electronics", "Clothing", "Home & Kitchen", "Beauty & Health", "Sports", "Books"];
+
+        // Dynamically generate tiles for categories
+        const categoriesContainer = document.getElementById('categories');
+
+
+        fetch('https://dummyjson.com/products/category-list')
+        .then(res => res.json())
+        .then(categories => {
+            categories.forEach(category => {
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            const link = document.createElement('a');
+            link.href = `products.html?category=${category.toLowerCase().replace(/ /g, '-')}`;
+            link.textContent = category;
+            tile.appendChild(link);
+            categoriesContainer.appendChild(tile);
+          });
+        })
+
+        
+    </script>
+</body>
+</html>
